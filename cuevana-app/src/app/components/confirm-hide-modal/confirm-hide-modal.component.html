@@ -1,0 +1,17 @@
+<!-- Fondo oscuro semitransparente que cubre la pantalla -->
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <!-- Cuadro del modal -->
+    <div class="bg-white rounded-lg p-6 max-w-sm w-full">
+      <h3 class="text-lg font-semibold mb-4">Confirmar acción</h3>
+      <p class="mb-4">¿Seguro que deseas ocultar <strong>{{ movie?.title }}</strong> del catálogo?</p>
+      <div class="text-right">
+        <button class="px-4 py-2 mr-2 rounded bg-gray-300 hover:bg-gray-400" (click)="onCancel()">
+          Cancelar
+        </button>
+        <button class="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700" (click)="onConfirm()">
+          Ocultar
+        </button>
+      </div>
+    </div>
+  </div>
+  

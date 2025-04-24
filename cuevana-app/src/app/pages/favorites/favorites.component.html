@@ -1,0 +1,28 @@
+<div class="container mx-auto p-4">
+    <h2 class="text-2xl font-bold mb-4">Mis Favoritos</h2>
+  
+    <div *ngIf="favoriteMovies.length > 0; else noFavs">
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div *ngFor="let movie of favoriteMovies" class="bg-white rounded shadow p-2">
+          <img 
+            [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" 
+            [alt]="movie.title" 
+            class="mb-2 rounded">
+          <h4 class="font-medium text-sm mb-1">{{ movie.title }}</h4>
+          <div class="flex justify-between">
+            <a class="text-blue-600 text-sm hover:underline" [routerLink]="['/movie', movie.id]">
+              Ver
+            </a>
+            <button class="text-red-600 text-sm" (click)="removeFavorite(movie.id)">
+              Quitar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <ng-template #noFavs>
+      <p>No hay películas favoritas aún. ¡Agrega algunas desde el catálogo o detalle!</p>
+    </ng-template>
+  </div>
+  

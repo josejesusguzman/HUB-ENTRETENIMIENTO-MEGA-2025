@@ -1,0 +1,9 @@
+/* src/styles.tailwind.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Aquí puedes usar @apply sin que SASS meta la cuchara */
+.btn-primary {
+  @apply bg-blue-600 text-white font-bold py-2 px-4 rounded /*shadow-lg*/;
+}
