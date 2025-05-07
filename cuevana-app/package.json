@@ -5,10 +5,11 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:ssr": "vite build --ssr src/main.server.ts",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:cov": "ng test --watch=false --code-coverage",
-    "serve:ssr:cuevana-app": "node dist/cuevana-app/server/server.mjs"
+    "serve:ssr:cuevana-app": "node dist/main.server.js"
   },
   "private": true,
   "dependencies": {

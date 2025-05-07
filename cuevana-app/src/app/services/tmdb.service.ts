@@ -14,6 +14,7 @@ export class TmdbService {
 
   // Obtener películas populares para el catálogo
   getPopularMovies(): Observable<any> {
+    console.log("lA NACA");
     const url = `${this.baseUrl}/movie/popular?api_key=${this.apiKey}&language=es`;
     return this.http.get(url);
   }
@@ -27,6 +28,12 @@ export class TmdbService {
   // Obtener recomendaciones de películas relacionadas a una película dada
   getMovieRecommendations(movieId: number): Observable<any> {
     const url = `${this.baseUrl}/movie/${movieId}/recommendations?api_key=${this.apiKey}&language=es`;
+    return this.http.get(url);
+  }
+
+  // Buscar una pelcula de acuerdo con su nombre
+  getMovieSearch(query: string): Observable<any> {
+    const url = `${this.baseUrl}/search/movie?api_key=${this.apiKey}&language=es`;
     return this.http.get(url);
   }
 }

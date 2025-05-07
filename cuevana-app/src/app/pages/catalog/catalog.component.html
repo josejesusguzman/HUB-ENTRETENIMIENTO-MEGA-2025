@@ -3,7 +3,7 @@
 
   <!-- Lista de películas -->
   <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-    <div *ngFor="let movie of movies" class="bg-white rounded shadow p-2">
+    <div *ngFor="let movie of catalog$ | async" class="bg-white rounded shadow p-2">
       <!-- Imagen de póster de la película -->
       <img 
         [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" 
