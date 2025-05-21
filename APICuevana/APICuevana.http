@@ -1,0 +1,6 @@
+@APICuevana_HostAddress = http://localhost:5171
+
+GET {{APICuevana_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

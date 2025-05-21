@@ -14,7 +14,6 @@ export class TmdbService {
 
   // Obtener películas populares para el catálogo
   getPopularMovies(): Observable<any> {
-    console.log("lA NACA");
     const url = `${this.baseUrl}/movie/popular?api_key=${this.apiKey}&language=es`;
     return this.http.get(url);
   }
