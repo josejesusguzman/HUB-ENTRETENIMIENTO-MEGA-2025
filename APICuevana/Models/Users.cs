@@ -7,8 +7,7 @@ public class Users
     public byte[] PasswordHash { get; set; } = null!;
     public DateTime CreatedAt { get; set; }
 
-    // Encapsulamiento
-    // Getter y Setter
+    
 
 
 }

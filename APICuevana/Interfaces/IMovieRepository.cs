@@ -1,6 +1,6 @@
 using APICuevana.Models;
 
-namespace CuevanaAPI.Interfaces;
+namespace APICuevana.Interfaces;
 
 public interface IMovieRepository : IRepository<Movies>
 {

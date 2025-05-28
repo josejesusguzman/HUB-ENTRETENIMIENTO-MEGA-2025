@@ -1,8 +1,8 @@
 
 using APICuevana.Models;
-using CuevanaAPI.Interfaces;
+using APICuevana.Interfaces;
 
-namespace CuevanaAPI.Repositories;
+namespace APICuevana.Repositories;
 
 public class UserRepository : IRepository<Users>
 {
@@ -27,6 +27,11 @@ public class UserRepository : IRepository<Users>
     }
 
     public Task<bool> UpdateAsync(Users entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<bool> UpdateAsync(int id, Users entity)
     {
         throw new NotImplementedException();
     }

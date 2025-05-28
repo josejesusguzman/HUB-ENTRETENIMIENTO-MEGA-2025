@@ -1,9 +1,9 @@
 using APICuevana.Data;
 using APICuevana.Models;
-using CuevanaAPI.Interfaces;
+using APICuevana.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace CuevanaAPI.Repositories;
+namespace APICuevana.Repositories;
 
 public class MovieRepository : IMovieRepository
 {
@@ -15,11 +15,11 @@ public class MovieRepository : IMovieRepository
         _dbContext = dbContext;
     }
 
-    public async Task<Movies> CreateAsync(Movies entity)
+    public async Task<Movies> CreateAsync(Movies movie)
     {
-        _dbContext.Movies.Add(entity);
+        _dbContext.Movies.Add(movie);
         await _dbContext.SaveChangesAsync();
-        return entity;
+        return movie;
     }
 
     public Task<bool> DeleteAsync(int id)
@@ -36,8 +36,9 @@ public class MovieRepository : IMovieRepository
             .Where(m => m.Title.Contains(title))
             .ToListAsync();
 
-    public Task<bool> UpdateAsync(Movies entity)
+    public async Task<bool> UpdateAsync(int id, Movies movie)
     {
-        throw new NotImplementedException();
+        _dbContext.Movies.Update(movie);
+        return (await _dbContext.SaveChangesAsync()) > 0;
     }
 }
