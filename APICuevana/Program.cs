@@ -10,6 +10,21 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Leer el origin permitido desde el appsettings
+var allowedOrigin = builder.Configuration["Cors:AllowedOrigin"]
+    ?? "http://localhost:5000";
+
+builder.Services.AddCors( options =>
+{
+    options.AddPolicy("FrontendPolicy", policy =>
+    {
+        policy.WithOrigins(allowedOrigin)
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
+
 var conn = builder.Configuration.GetConnectionString("CuevanaAppDB")!;
 builder.Services.AddDbContext<CuevanaAppDbContext>(opts =>
     opts.UseSqlServer(conn)
@@ -36,26 +51,24 @@ builder.Services.AddControllers();
 
 // Implementación de Swagger
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c => {
-    c.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "Cuevana API",
-        Version = "v1"
-    });
-});
+builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
+app.UseCors("FrontendPolicy");
+
+
 // Middleware
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.Run();
 

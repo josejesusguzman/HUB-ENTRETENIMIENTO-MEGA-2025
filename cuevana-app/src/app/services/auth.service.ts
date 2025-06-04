@@ -1,26 +1,33 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, delay, of, tap } from 'rxjs';
+import { ApiService } from './ApiService';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private logged$ = new BehaviorSubject<boolean>(false);
+  private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
+  isLoggedIn$ = this.loggedIn.asObservable();
 
-  isLoggedIn$ = this.logged$.asObservable();
+  constructor(private api: ApiService) { }
 
-  constructor() { }
+  private hasToken(): boolean {
+    return !!localStorage.getItem("jwt");
+  }
 
   // ESTO ES UNA SIMULACIÓN DEL LOGIN
   login(user: string, pass: string){
-    const isValid = (user === 'admin' && pass === 'password');
-    return of(isValid).pipe(
-      delay(500),
-      tap(ok => this.logged$.next(ok))
+    return this.api.login(user, pass).pipe(
+      tap(res => {
+          localStorage.setItem('jwt', res.token);
+          this.loggedIn.next(true);
+      })
     );
   }
 
-  logout(){
-    this.logged$.next(false);
+  logout()
+  {
+    localStorage.removeItem("jwt");
+    this.loggedIn.next(false);
   }
 }
